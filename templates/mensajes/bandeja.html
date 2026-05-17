@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Bandeja de entrada - Anprale{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Bandeja de entrada</h2>
+        <div>
+            <a href="{% url 'enviados' %}" class="btn btn-outline-secondary me-2">Enviados</a>
+            <a href="{% url 'nuevo_mensaje' %}" class="btn btn-success">Nuevo mensaje</a>
+        </div>
+    </div>
+
+    {% if mensajes %}
+        {% for mensaje in mensajes %}
+        <div class="card mb-2 {% if not mensaje.leido %}border-success{% endif %}">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        {% if not mensaje.leido %}
+                        <span class="badge bg-success me-2">Nuevo</span>
+                        {% endif %}
+                        <strong>{{ mensaje.remitente.username }}</strong>
+                        <span class="ms-2">{{ mensaje.asunto }}</span>
+                    </div>
+                    <small class="text-muted">{{ mensaje.fecha|date:"d/m/Y H:i" }}</small>
+                </div>
+                <div class="mt-2">
+                    <a href="{% url 'ver_mensaje' mensaje.pk %}" class="btn btn-sm btn-outline-success">Leer</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-secondary">No tienes mensajes recibidos.</div>
+    {% endif %}
+</div>
+{% endblock %}

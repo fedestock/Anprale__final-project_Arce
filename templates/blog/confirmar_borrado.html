@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar borrado - Anprale{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">Confirmar borrado</div>
+                <div class="card-body">
+                    <p>¿Seguro que quieres borrar el artículo <strong>{{ object.titulo }}</strong>?</p>
+                    <p class="text-muted small">Esta acción no se puede deshacer.</p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Sí, borrar</button>
+                        <a href="{% url 'lista_articulos' %}" class="btn btn-secondary ms-2">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ categoria.nombre }} - Anprale{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-1">{{ categoria.nombre }}</h2>
+    {% if categoria.descripcion %}
+    <p class="text-muted">{{ categoria.descripcion }}</p>
+    {% endif %}
+    <hr>
+
+    {% if articulos %}
+        {% for articulo in articulos %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5><a href="{% url 'detalle_articulo' articulo.pk %}" class="text-decoration-none">{{ articulo.titulo }}</a></h5>
+                <small class="text-muted">{{ articulo.autor.username }} - {{ articulo.fecha }}</small>
+                <div class="mt-2">
+                    <a href="{% url 'detalle_articulo' articulo.pk %}" class="btn btn-sm btn-outline-success">Leer más</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-secondary">No hay páginas aún en esta categoría.</div>
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary mt-3">Volver</a>
+</div>
+{% endblock %}

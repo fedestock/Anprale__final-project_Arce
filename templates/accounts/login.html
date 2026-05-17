@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Anprale{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header" style="background:#2c5f2d; color:white;">
+                    <h4 class="mb-0">Iniciar sesión</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Usuario</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña</label>
+                            {{ form.password }}
+                        </div>
+                        {% if form.errors %}
+                        <div class="alert alert-danger">Usuario o contraseña incorrectos.</div>
+                        {% endif %}
+                        <button type="submit" class="btn btn-success w-100">Entrar</button>
+                    </form>
+                    <hr>
+                    <p class="text-center mb-0">No tienes cuenta? <a href="{% url 'registro' %}">Regístrate</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

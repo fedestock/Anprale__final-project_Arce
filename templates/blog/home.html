@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Anprale Refugios - El Bolsón, Patagonia{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Refugios Anprale</h1>
+        <p class="lead">El Bolsón, Patagonia Argentina. Trekking, montaña y experiencias en los refugios de la cordillera.</p>
+        <a href="{% url 'lista_articulos' %}" class="btn btn-light text-success fw-bold">Ver artículos</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h4 class="mb-4">Últimos artículos</h4>
+
+            <form method="GET" class="mb-4">
+                <div class="input-group">
+                    {{ form.busqueda }}
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </form>
+
+            {% if articulos %}
+                {% for articulo in articulos %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h5 class="card-title mb-1">
+                                    <a href="{% url 'detalle_articulo' articulo.pk %}" class="text-decoration-none text-dark">
+                                        {{ articulo.titulo }}
+                                    </a>
+                                </h5>
+                                {% if articulo.subtitulo %}
+                                <p class="text-muted small mb-1">{{ articulo.subtitulo }}</p>
+                                {% endif %}
+                            </div>
+                            <span class="badge-categoria">{{ articulo.categoria.nombre }}</span>
+                        </div>
+                        <small class="text-muted">Por {{ articulo.autor.username }} - {{ articulo.fecha }}</small>
+                        <div class="mt-2">
+                            <a href="{% url 'detalle_articulo' articulo.pk %}" class="btn btn-sm btn-outline-success">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-secondary">
+                    No hay páginas aún. {% if user.is_authenticated %}<a href="{% url 'crear_articulo' %}">Crea el primero.</a>{% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header" style="background:#2c5f2d; color:white;">Categorías</div>
+                <div class="card-body">
+                    {% if categorias %}
+                        {% for cat in categorias %}
+                        <a href="{% url 'articulos_por_categoria' cat.pk %}" class="d-block mb-1 text-decoration-none">
+                            {{ cat.nombre }}
+                            <span class="text-muted small">({{ cat.articulo_set.count }})</span>
+                        </a>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted small">Sin categorías aún.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if user.is_authenticated %}
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'crear_articulo' %}" class="btn btn-success w-100 mb-2">Nuevo artículo</a>
+                    <a href="{% url 'crear_categoria' %}" class="btn btn-outline-success w-100">Nueva categoría</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

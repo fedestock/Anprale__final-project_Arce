@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Acerca de - Anprale Refugios{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="mb-4">Acerca de Anprale</h1>
+            <p class="lead">
+                Anprale es la Asociación de Refugios y Albergues de Montaña de la Patagonia,
+                con sede en El Bolsón, Río Negro, Argentina.
+            </p>
+            <p>
+                La cadena de refugios Anprale conecta algunos de los paisajes más hermosos
+                de la cordillera patagónica. Desde el Refugio El Piltriquitrón hasta el
+                Refugio Hielo Azul, cada uno ofrece una experiencia única en contacto
+                con la naturaleza.
+            </p>
+            <p>
+                Este blog nació para compartir experiencias, consejos y relatos de quienes
+                recorren estas sendas. Si visitaste algún refugio, tu historia tiene lugar aquí.
+            </p>
+            <hr>
+            <h4>Los refugios</h4>
+            <ul>
+                <li>Refugio El Piltriquitrón</li>
+                <li>Refugio Penitentes</li>
+                <li>Refugio Hielo Azul</li>
+                <li>Refugio Cajón del Azul</li>
+                <li>Refugio La Playita</li>
+            </ul>
+            <hr>
+            <h4>El Bolsón</h4>
+            <p>
+                El Bolsón es una ciudad ubicada en el sur de la provincia de Río Negro,
+                Argentina, a 130 km al sur de Bariloche. Conocida por su microclima
+                particular, sus ferias artesanales y ser la puerta de entrada a los
+                refugios de montaña Anprale.
+            </p>
+            <a href="{% url 'lista_articulos' %}" class="btn btn-success">Ver artículos</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

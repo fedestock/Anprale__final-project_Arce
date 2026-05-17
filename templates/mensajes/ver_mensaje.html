@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ mensaje.asunto }} - Anprale{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header" style="background:#2c5f2d; color:white;">
+                    {{ mensaje.asunto }}
+                </div>
+                <div class="card-body p-4">
+                    <p><strong>De:</strong> {{ mensaje.remitente.username }}</p>
+                    <p><strong>Para:</strong> {{ mensaje.destinatario.username }}</p>
+                    <p><strong>Fecha:</strong> {{ mensaje.fecha|date:"d/m/Y H:i" }}</p>
+                    <hr>
+                    <p>{{ mensaje.contenido }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'bandeja_entrada' %}" class="btn btn-outline-secondary">Volver a bandeja</a>
+                    <a href="{% url 'nuevo_mensaje' %}" class="btn btn-success ms-2">Responder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
